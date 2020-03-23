@@ -6,8 +6,8 @@ LABEL maintainer="Andras Gyacsok <andras.gyacsok@boehringer-ingelheim.com>"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
-ARG projectHome=/opt/app-root/src
-ARG home=${projectHome}
+ARG home="/opt/app-root"
+ARG projectHome=${home}/src
 ARG nexusHostWithBasicAuth
 ARG nexusHostWithoutScheme
 
@@ -60,7 +60,7 @@ RUN chown -R prophet: ${projectHome} && \
 
 EXPOSE 8080
 
-ENV HOME=${projectHome}
+ENV HOME=${home}
 WORKDIR ${projectHome}
 
 RUN if [ ! -z ${nexusHostWithBasicAuth} ]; \
