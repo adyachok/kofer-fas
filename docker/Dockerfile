@@ -6,11 +6,11 @@ LABEL maintainer="Andras Gyacsok <andras.gyacsok@boehringer-ingelheim.com>"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
-ARG home="/opt/app-root/src"
-ARG projectHome=${home}
+ARG projectHome="/opt/app-root/src"
 ARG nexusHostWithBasicAuth
 ARG nexusHostWithoutScheme
 
+ENV HOME=${projectHome}
 # Define en_US.
 ENV LANGUAGE en_US.UTF-8
 ENV LANG en_US.UTF-8
