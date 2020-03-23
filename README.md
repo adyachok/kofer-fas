@@ -1,7 +1,7 @@
 # FunctionAsService
 
 ### Installation
-   1. Create PostgreSQL database:
+  - Create PostgreSQL database:
    ```sql
     CREATE DATABASE zz_fas;
     -- Create user if needed
@@ -9,8 +9,13 @@
     -- Set permissions
     GRANT ALL PRIVILEGES ON DATABASE zz_fas TO testu;
    ```
-   2. Add persistent volume in OpenShif (prod env). Mount in */opt/app-root/src/uploads*
+  - Add persistent volume in OpenShif (prod env). Mount in */opt/app-root/src/uploads*
    or any you would like (You have to change **UPLOAD_FOLDER**).
+   
+  - Create Kafka topic:
+   ```bash
+   oc exec -it bus-kafka-1 -c kafka -- bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic runner-update --create --partitions 3 --replication-factor 3
+   ```
     
 ### Used packages
 
