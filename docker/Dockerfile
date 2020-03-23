@@ -6,8 +6,8 @@ LABEL maintainer="Andras Gyacsok <andras.gyacsok@boehringer-ingelheim.com>"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
-ARG home="/opt/app-root"
-ARG projectHome=${home}/src
+ARG home="/opt/app-root/src"
+ARG projectHome=${home}
 ARG nexusHostWithBasicAuth
 ARG nexusHostWithoutScheme
 
@@ -60,13 +60,14 @@ RUN chown -R prophet: ${projectHome} && \
 
 EXPOSE 8080
 
-ENV HOME=${home}
 WORKDIR ${projectHome}
 
 RUN if [ ! -z ${nexusHostWithBasicAuth} ]; \
     then pip install -i ${nexusHostWithBasicAuth}/repository/pypi-all/simple --trusted-host ${nexusHostWithoutScheme} --upgrade pip && pip install -i ${nexusHostWithBasicAuth}/repository/pypi-all/simple --trusted-host ${nexusHostWithoutScheme} -r src/requirements.txt; \
     else pip install --upgrade pip && pip install -r src/requirements.txt; \
     fi
+
+RUN mkdir ${home}/uploads
 
 USER 1001
 
