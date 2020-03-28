@@ -1,4 +1,4 @@
-aioeventlet==0.5.1
+aioeventlet==0.5.2
 aiohttp==3.6.2
 aiohttp-cors==0.7.0
 async-timeout==3.0.1
