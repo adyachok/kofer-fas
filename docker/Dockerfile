@@ -52,7 +52,9 @@ RUN set -ex  && \
 COPY run.sh ${projectHome}
 COPY dist ${projectHome}
 
-RUN chown -R prophet: ${projectHome} && \
+RUN mkdir ${projectHome}/uploads && \
+    mkdir ${projectHome}/tmp_uploads && \
+    chown -R prophet: ${projectHome} && \
     chgrp -R 0 ${projectHome} && \
     chmod -R g=u ${projectHome} && \
     chmod g=u /etc/passwd && \
@@ -68,7 +70,5 @@ RUN if [ ! -z ${nexusHostWithBasicAuth} ]; \
     fi
 
 USER 1001
-
-RUN mkdir uploads && mkdir tmp_uploads
 
 CMD ["./run.sh"]
