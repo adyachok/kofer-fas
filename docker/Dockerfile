@@ -67,8 +67,8 @@ RUN if [ ! -z ${nexusHostWithBasicAuth} ]; \
     else pip install --upgrade pip && pip install -r src/requirements.txt; \
     fi
 
-RUN mkdir uploads && mkdir tmp_uploads
-
 USER 1001
+
+RUN mkdir uploads && mkdir tmp_uploads
 
 CMD ["./run.sh"]
