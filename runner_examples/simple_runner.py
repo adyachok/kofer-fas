@@ -44,6 +44,7 @@ class SimpleRunner(AbstractRunner):
         else:
             raise Exception('Inference was not successful. Aborting.')
 
+
 # !Important: to make you logic work on the platform, please,
 # include the line below.
 klass = SimpleRunner

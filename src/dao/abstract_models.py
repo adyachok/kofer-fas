@@ -18,4 +18,3 @@ class AbstractRunner:
             'description': cls.description,
             'department': cls.department
         }
-
