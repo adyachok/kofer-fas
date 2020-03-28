@@ -9,6 +9,7 @@ logger = get_logger('config')
 class Config:
 
     UPLOAD_FOLDER = os.path.join(os.getenv('HOME'), 'uploads')
+    TEMP_UPLOAD_FOLDER = os.path.join(os.getenv('HOME'), 'tmp_uploads')
     # max runner file size 50 Kb
     MAX_CONTENT_LENGTH = 50 * 1024
     SERVICE_PORT = 5000

@@ -21,3 +21,4 @@
 
  - [PYT](https://github.com/python-security/pyt)
  - [Confluent Kafka Python](https://github.com/confluentinc/confluent-kafka-python)
+ - [Bandit](https://github.com/PyCQA/bandit)
