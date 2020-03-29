@@ -10,6 +10,7 @@ from src.config import Config
 from src.custom_exeptions import RunnerMetadataExrtactionException, \
     RunnerFormatException
 from src.dao import db
+from src.dao.sql_models import to_camel_case
 from src.services.runner import RunnerService
 from src.utils.files import is_runner_safe, get_runner_metadata, \
     save_file_in_tmp_folder
@@ -89,8 +90,7 @@ def upload():
                   callback=delivery_report)
         p.flush()
         logger.info(runner)
-    return jsonify(Ok20XResponse(update).to_dict())
-    return "Ok"
+    return jsonify(Ok20XResponse(to_camel_case(update)).to_dict())
 
 
 app.run('0.0.0.0', config.SERVICE_PORT, debug=config.SERVICE_DEBUG)

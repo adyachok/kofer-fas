@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 from sqlalchemy import and_
@@ -7,6 +8,21 @@ from src.utils.logger import get_logger
 
 
 logger = get_logger('sql_models')
+
+
+def to_camel_case(dict_obj):
+    json_dict = {}
+    for key, val in dict_obj.items():
+        if '_' in key and not key.startswith('_'):
+            for i, c in enumerate(key):
+                if c == '_':
+                    key = key[:i] + key[i+1:].capitalize()
+            key = key.replace('_', '')
+        if isinstance(val, dict):
+            json_dict[key] = to_camel_case(val)
+        else:
+            json_dict[key] = val
+    return json_dict
 
 
 class BaseMixin(object):
@@ -20,6 +36,14 @@ class BaseMixin(object):
                            nullable=False,
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
+
+    def serialize(self):
+        raise NotImplementedError
+
+    def toJson(self):
+        dict_obj = self.serialize()
+        json_dict = to_camel_case(dict_obj)
+        return json.dumps(json_dict)
 
 
 class Runner(BaseMixin, db.Model):
@@ -51,7 +75,7 @@ class Runner(BaseMixin, db.Model):
             'name': self.name,
             'description': self.description,
             'department': self.department,
-            'currentRevision': self.current_revision,
+            'current_revision': self.current_revision,
             'file': self._get_current_runner_file(),
             'createdAt': self.created_at.strftime("%d-%m-%Y %H:%M:%S"),
             'updatedAt': self.updated_at.strftime("%d-%m-%Y %H:%M:%S")
