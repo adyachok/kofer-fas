@@ -5,9 +5,7 @@
 @Library('ods-jenkins-shared-library@production') _
 
 /* generated jenkins file used for building and deploying fas in projects zz */
-def final projectId = 'zz'
-def final componentId = 'fas'
-def final credentialsId = "${projectId}-cd-cd-user-with-password"
+
 def dockerRegistry
 node {
   dockerRegistry = env.DOCKER_REGISTRY
